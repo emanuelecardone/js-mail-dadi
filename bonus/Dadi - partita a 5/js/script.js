@@ -38,17 +38,18 @@ startButton.addEventListener('click', function(){
     gameSection.classList.remove('d-none');
 
     // Creo il numero random per utente e computer (mi serve un array per fare dei controlli sul vincitore)
-    const userNumber = Math.floor(Math.random() * 10) + 1;
-    const player2Number = Math.floor(Math.random() * 10) + 1;
-    const player3Number = Math.floor(Math.random() * 10) + 1;
-    const player4Number = Math.floor(Math.random() * 10) + 1;
-    const player5Number = Math.floor(Math.random() * 10) + 1;
+    let userNumber = Math.floor(Math.random() * 10) + 1;
+    let player2Number = Math.floor(Math.random() * 10) + 1;
+    let player3Number = Math.floor(Math.random() * 10) + 1;
+    let player4Number = Math.floor(Math.random() * 10) + 1;
+    let player5Number = Math.floor(Math.random() * 10) + 1;
     const numbersList = [userNumber, player2Number, player3Number, player4Number, player5Number];
     console.log(numbersList);
 
-
+    // Questa variabile flag mi servirà per dopo, ma la metto ora in quanto dopo modifico i numeri
+    let userWins = false;
     if(userNumber === Math.max(userNumber, player2Number, player3Number, player4Number, player5Number)){
-        console.log('hai vinto');
+        userWins = true;
     }
 
     // Creo la classifica (ogni volta che trova il numero più alto lo rimuove dalla lista e lo aggiunge alla classifica. Così sarò sicuro di avere i numeri in ordine decrescente)
@@ -109,12 +110,46 @@ startButton.addEventListener('click', function(){
     // LAYOUT CLASSIFICA
 
     for(let i = 0; i < leaderboard.length; i++){
+
+        const userName = `Tu:`;
+        const player2Name = `Giocatore 2:`;
+        const player3Name = `Giocatore 3:`;
+        const player4Name = `Giocatore 4:`;
+        const player5Name = `Giocatore 5:`;
+        let currentName;
+
         // Variabile per la row
         const mainRow = document.querySelector('.leaderboard_row');
 
-        const currentPlayer = leaderboard[i];
+        let currentPlayer = leaderboard[i];
 
-        mainRow.innerHTML += `<div class="col-12"><div class="d-flex justify-content-center align-items-center text-light fw-bold">${currentPlayer}</div></div>`;
+        // Aumento ogni volta il numero assegnato a ciascuno di 20 se lo trova uguale, 
+        // in modo da non farglielo ritrovare uguale una seconda volta e non riassegnare 
+        // lo stesso nome una seconda volta se 2 o più numeri sono uguali
+        if(currentPlayer === userNumber){
+            currentName = userName;
+            userNumber += 20;
+        } else if(currentPlayer === player2Number){
+            currentName = player2Name;
+            player2Number += 20;
+        } else if(currentPlayer === player3Number){
+            currentName = player3Name;
+            player3Number += 20;
+        } else if(currentPlayer === player4Number){
+            currentName = player4Name;
+            player4Number += 20;
+        } else{
+            currentName = player5Name;
+            player5Number += 20;
+        }
+
+        mainRow.innerHTML += `<div class="col-12"><div class="d-flex justify-content-center align-items-center text-light fw-bold mb-3">${currentName} <span class="ms-4">${currentPlayer}</span></div></div>`;
+    }
+
+    if(userWins){
+        document.querySelector('.results_title').innerHTML = `Hai vinto <i class="fas fa-smile-wink text-light"></i>`;
+    } else{
+        document.querySelector('.results_title').innerHTML = `Hai perso <i class="fas fa-sad-tear text-light"></i>`;
     }
 });
 
