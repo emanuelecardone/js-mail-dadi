@@ -14,3 +14,28 @@
 // } else{
 //     alert(`Hai pareggiato (Tu: ${userNumber}, Computer: ${computerNumber})`);
 // }
+
+// Variabili per apertura/chiusura sezione Regole e Main
+const pageHeader = document.querySelector('header');
+const pageMain = document.querySelector('main');
+const rulesButton = document.querySelector('.rules_button');
+
+// SEZIONE RULES
+rulesButton.addEventListener('click', function(){
+    // Dichiarazione variabili per sezione Rules e pulsante di chiusura
+    const rulesSection = document.querySelector('.rules_wrapper');
+    const rulesCloseButton = document.querySelector('.rules_close_button');
+
+    // Apertura
+    pageMain.classList.remove('d-none');
+    rulesSection.classList.remove('d-none');
+
+    // Chiusura
+    rulesCloseButton.addEventListener('click', function(){
+        pageMain.classList.add('d-none');
+        rulesSection.classList.add('d-none');
+    });
+});
+
+
+
