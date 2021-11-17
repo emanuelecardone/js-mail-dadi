@@ -3,15 +3,6 @@
 // Stabilire il vincitore, in base a chi fa il punteggio più alto.
 
 
-// Imposto la logica della vittoria/sconfitta/pareggio dell'utente col relativo output
-// if(userNumber > computerNumber){
-//     alert(`Hai vinto (Tu: ${userNumber}, Computer: ${computerNumber})`);
-// } else if(userNumber < computerNumber){
-//     alert(`Hai perso (Tu: ${userNumber}, Computer: ${computerNumber})`);
-// } else{
-//     alert(`Hai pareggiato (Tu: ${userNumber}, Computer: ${computerNumber})`);
-// }
-
 // Variabili per apertura/chiusura sezione Regole, Gioco e Main
 const pageHeader = document.querySelector('header');
 const pageMain = document.querySelector('main');
@@ -60,23 +51,71 @@ startButton.addEventListener('click', function(){
         console.log('hai vinto');
     }
 
-    // Variabile per la row
-     const mainRow = document.querySelector('.row');
-
-    // Creo la classifica
+    // Creo la classifica (ogni volta che trova il numero più alto lo rimuove dalla lista e lo aggiunge alla classifica. Così sarò sicuro di avere i numeri in ordine decrescente)
     const leaderboard = [];
-    for(i = 0; i < 5; i++){
+
+    // Primo classificato
+    for(let i = 0; i < 5; i++){
         
         let currentPlayer = numbersList[i];
 
-        if(currentPlayer === Math.max(userNumber, player2Number, player3Number, player4Number, player5Number)){
+        if(currentPlayer === Math.max.apply(null, numbersList)){
             console.log(currentPlayer);
             leaderboard.push(currentPlayer);
             numbersList.splice(i, 1);
         }
     }
+    // Secondo classificato
+    for(let i = 0; i < 4; i++){
+        
+        let currentPlayer = numbersList[i];
+
+        if(currentPlayer === Math.max.apply(null, numbersList)){
+            console.log(currentPlayer);
+            leaderboard.push(currentPlayer);
+            numbersList.splice(i, 1);
+        }
+    }
+    // Terzo classificato
+    for(let i = 0; i < 3; i++){
+        
+        let currentPlayer = numbersList[i];
+
+        if(currentPlayer === Math.max.apply(null, numbersList)){
+            console.log(currentPlayer);
+            leaderboard.push(currentPlayer);
+            numbersList.splice(i, 1);
+        }
+    }
+    // Quarto classificato
+    for(let i = 0; i < 2; i++){
+        
+        let currentPlayer = numbersList[i];
+
+        if(currentPlayer === Math.max.apply(null, numbersList)){
+            console.log(currentPlayer);
+            leaderboard.push(currentPlayer);
+            numbersList.splice(i, 1);
+        }
+    }
+    // Quinto classificato ( se non l'ha già fatto il 4 for, lo aggiungo io)
+    if(leaderboard.length !== 5){
+        leaderboard.push(numbersList[0]);
+    }
+    
     console.log(numbersList);
     console.log(leaderboard);
+
+    // LAYOUT CLASSIFICA
+
+    for(let i = 0; i < leaderboard.length; i++){
+        // Variabile per la row
+        const mainRow = document.querySelector('.leaderboard_row');
+
+        const currentPlayer = leaderboard[i];
+
+        mainRow.innerHTML += `<div class="col-12"><div class="d-flex justify-content-center align-items-center text-light fw-bold">${currentPlayer}</div></div>`;
+    }
 });
 
 
