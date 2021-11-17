@@ -27,7 +27,7 @@ submitButton.addEventListener('click', function(){
         let emailPresence = false;
 
         // Controllo se l'email è presente
-        for(i = 0; i < allowedEmailList.length; i++){
+        for(let i = 0; i < allowedEmailList.length; i++){
 
             currentEmail = allowedEmailList[i];
 

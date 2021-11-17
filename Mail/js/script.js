@@ -13,7 +13,7 @@ const userEmail = prompt(`Per favore inserisci la tua e-mail`);
 let emailPresence = false;
 
 // Controllo se l'email è presente
-for(i = 0; i < allowedEmailList.length; i++){
+for(let i = 0; i < allowedEmailList.length; i++){
     
     currentEmail = allowedEmailList[i];
 
