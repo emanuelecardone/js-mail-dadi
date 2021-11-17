@@ -23,8 +23,14 @@ for(i = 0; i < allowedEmailList.length; i++){
 }
 
 // Output
-if(emailPresence){
-    alert(`La tua e-mail è presente nella lista di quelle che hanno accesso`);
+if(!(userEmail === '' || userEmail === null)){
+    if(emailPresence){
+        alert(`La tua e-mail è presente nella lista di quelle che hanno accesso`);
+    } else{
+        alert(`La tua e-mail non è presente nella lista di quelle che hanno accesso`);
+    }
+} else if(userEmail === ''){
+    alert(`Non puoi inserire un testo vuoto`);
 } else{
-    alert(`La tua e-mail non è presente nella lista di quelle che hanno accesso`);
+    alert(`Hai annullato l'operazione`);
 }
