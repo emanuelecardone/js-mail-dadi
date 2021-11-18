@@ -12,7 +12,7 @@ const submitButton = document.querySelector('.submit_button');
 submitButton.addEventListener('click', function(){
 
     // Variabile email
-    const userEmail = document.querySelector('.email_form').value;
+    const userEmail = document.querySelector('.email_form').value.toLowerCase();
     
     // Controllo stringa vuota o nulla
     if(!(userEmail === '')){
